@@ -1,0 +1,27 @@
+{
+  "name": "osa3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Matuu2/Fullstack2018vol2.git"
+  },
+  "author": "Matias Ala-Sunila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matuu2/Fullstack2018vol2/issues"
+  },
+  "homepage": "https://github.com/Matuu2/Fullstack2018vol2#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
