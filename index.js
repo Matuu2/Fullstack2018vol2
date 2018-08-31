@@ -3,6 +3,7 @@ const morgan  = require('morgan')
 const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
+const Person = require('./models/person')
 
 let persons = [
     { name: 'Arto Hellas', number: '040-123456' ,id: 0},
@@ -18,12 +19,24 @@ app.use(cors())
 app.use(morgan(':method :url :content :status :res[content-length] - :response-time ms'))
 app.use(express.static('build'))
 
+const formatPerson = (person) => {
+  return {
+    name: person.name,
+    number: person.number,
+    id: person.id
+  }
+}
+
 app.get('/api/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/persons', (request, response) => {
-  response.json(persons)
+  Person
+  .find({}, {__v: 0})
+  .then(persons => {
+    response.json(persons.map(formatPerson))
+  })
 })
 
 app.get('/api/info', (request, response) => {
