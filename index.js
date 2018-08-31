@@ -19,13 +19,6 @@ app.use(cors())
 app.use(morgan(':method :url :content :status :res[content-length] - :response-time ms'))
 app.use(express.static('build'))
 
-const formatPerson = (person) => {
-  return {
-    name: person.name,
-    number: person.number,
-    id: person.id
-  }
-}
 
 app.get('/api/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
@@ -33,9 +26,9 @@ app.get('/api/', (request, response) => {
 
 app.get('/api/persons', (request, response) => {
   Person
-  .find({}, {__v: 0})
+  .find({})
   .then(persons => {
-    response.json(persons.map(formatPerson))
+    response.json(persons.map(Person.format))
   })
 })
 
@@ -73,11 +66,16 @@ app.post('/api/persons/', (request, response) => {
   if ( index !== -1 ){
     return response.status(400).json({error: 'name must be unique'})
   }
-  const person = request.body
-  person.id = Math.floor(Math.random()*10000)
-  persons = persons.concat(person)
-
-  response.json(person)
+  const person = new Person({
+    name: request.body.name,
+    number: request.body.number,
+    id: Math.floor(Math.random()*10000)
+  })
+  person
+    .save()
+    .then(savedperson => {
+      response.json(Person.format(savedperson))
+    })
 })
 
 const PORT = process.env.PORT || 3001
