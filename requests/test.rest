@@ -1,0 +1,7 @@
+GET https://test.ain.rd.tut.fi:1026/fiware/v2/entities 
+FIWARE-Service: Solar_panels
+Fiware-Servicepath: /
+###
+GET https://test.ain.rd.tut.fi:8666/fiware/STH/v1/contextEntities/type/Measurement/id/pv01_inverter02_totalyield/attributes/measuredValue?aggrMethod=sum&aggrPeriod=hour&dateFrom=2018-11-27T00:00:00&dateTo=2018-11-30T00:00:00 
+FIWARE-Service: Solar_panels
+Fiware-Servicepath: /
